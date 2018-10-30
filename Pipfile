@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"beautifulsoup4" = "*"
+nltk = "*"
+"html5lib" = "*"
+requests = {extras = ["security"], version = "*"}
+certifi = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
