@@ -31,6 +31,3 @@ class Sniff():
         #extract text and remove whitespaces from bit of text
         sample_text = soup.find("div", 'post-body entry-content')
         return sample_text
-
-
-
