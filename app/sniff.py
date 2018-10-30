@@ -3,9 +3,10 @@ from urllib.request import Request, urlopen
 import ssl
 
 
-url = 'http://honorsprogram.gwublogs.com/2017/11/08/honorsproblems-ive-messed-up-everything-oh-no/'
-
 class Sniff():
+    """
+    Crawls a page to fetch text
+    """
 
     def __init__(self, url):
         self.url = url
@@ -18,11 +19,18 @@ class Sniff():
         req = Request(self.url, headers={'User-Agent': 'Mozilla/5.0'})
         response = urlopen(req, context=context)
         raw_text = response.read()
+        return raw_text
 
-        # soup = BeautifulSoup(raw_text)
-        soup = BeautifulSoup(raw_text, "html5lib")
+
+    def format_data(self, data):
+        """
+        formats the fetched data to actual text, removing the html tags.
+        """
+        soup = BeautifulSoup(data, "html5lib")
         
         #extract text and remove whitespaces from bit of text
         sample_text = soup.find("div", 'post-body entry-content')
         return sample_text
+
+
 

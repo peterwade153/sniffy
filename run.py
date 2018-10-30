@@ -5,5 +5,6 @@ if __name__ == '__main__':
     url2 = "https://www.wintellect.com/containerize-python-app-5-minutes/"
     url3 = "http://encouragementforeverydaystruggles.blogspot.com/"
     sd = Sniff(url3)
-    ls = sd.fetch_data()
+    data = sd.fetch_data()
+    ls = sd.format_data(data)
     print(ls)
