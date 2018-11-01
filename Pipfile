@@ -9,6 +9,7 @@ nltk = "*"
 "html5lib" = "*"
 requests = {extras = ["security"], version = "*"}
 certifi = "*"
+matplotlib = "*"
 
 [dev-packages]
 

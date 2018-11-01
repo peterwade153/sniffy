@@ -2,6 +2,15 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import ssl
 
+import nltk
+nltk.download('punkt')
+nltk.download("stopwords")
+from nltk.corpus import stopwords
+
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plot
+
 
 class Sniff():
     """
@@ -21,13 +30,41 @@ class Sniff():
         raw_text = response.read()
         return raw_text
 
-
-    def format_data(self, data):
+    def format_data(self, raw_data):
         """
-        formats the fetched data to actual text, removing the html tags.
+        Formats the fetched data to actual text, removing the html tags.
         """
-        soup = BeautifulSoup(data, "html5lib")
+        soup = BeautifulSoup(raw_data, "html5lib")
         
-        #extract text and remove whitespaces from bit of text
         sample_text = soup.find("div", 'post-body entry-content')
-        return sample_text
+        text = sample_text.get_text()
+        return text
+
+    def tokenize_words (self, data):
+        """
+        Packs all words in sentences into a list
+        """
+        words = nltk.word_tokenize(data)
+        tokens = [w for w in words]
+        return tokens
+
+    def remove_stop_words(self, data):
+        """
+        Remove stop words from the text
+        """
+        cleaned_data = []
+        for token in data:
+            if token.lower() not in set(stopwords.words('english')):
+                cleaned_data.append(token)
+        return cleaned_data
+
+    def word_frequency(self, data):
+        """
+        Returns words frequency and also their frequency dist
+        """
+        new_data = [] 
+        freq = nltk.FreqDist(data)
+        freq.plot(50, cumulative=False)
+        for key, value in freq.items():
+            new_data.append({key:value})
+        return new_data

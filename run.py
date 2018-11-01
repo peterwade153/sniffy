@@ -7,4 +7,7 @@ if __name__ == '__main__':
     sd = Sniff(url3)
     data = sd.fetch_data()
     ls = sd.format_data(data)
-    print(ls)
+    ls = sd.tokenize_words(ls)
+    ls = sd.remove_stop_words(ls)
+    ls = sd.word_frequency(ls)
+    # print(ls)
