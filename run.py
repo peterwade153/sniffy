@@ -10,4 +10,3 @@ if __name__ == '__main__':
     ls = sd.tokenize_words(ls)
     ls = sd.remove_stop_words(ls)
     ls = sd.word_frequency(ls)
-    # print(ls)

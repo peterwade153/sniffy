@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
-from urllib.request import Request, urlopen
 import ssl
+
+from bs4 import BeautifulSoup
+import requests
 
 import nltk
 nltk.download('punkt')
@@ -24,21 +25,19 @@ class Sniff():
         """
         Fetches data from a webpage and parse it then pick out the text. 
         """
-        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
-        req = Request(self.url, headers={'User-Agent': 'Mozilla/5.0'})
-        response = urlopen(req, context=context)
-        raw_text = response.read()
-        return raw_text
+        res =  requests.get(self.url, headers={'User-Agent': 'Mozilla/5.0'})
+        if res.status_code == 200:
+            html = res.text.strip()
+            return html
 
-    def format_data(self, raw_data):
+    def format_data(self, html):
         """
         Formats the fetched data to actual text, removing the html tags.
         """
-        soup = BeautifulSoup(raw_data, "html5lib")
-        
-        sample_text = soup.find("div", 'post-body entry-content')
-        text = sample_text.get_text()
-        return text
+        soup = BeautifulSoup(html, "html5lib")
+        text = soup.find("div", 'post-body entry-content')
+        clean_text = text.get_text()
+        return clean_text
 
     def tokenize_words (self, data):
         """
@@ -60,7 +59,7 @@ class Sniff():
 
     def word_frequency(self, data):
         """
-        Returns words frequency and also their frequency dist
+        Returns words frequency and also plot their frequency dist graph
         """
         new_data = [] 
         freq = nltk.FreqDist(data)
