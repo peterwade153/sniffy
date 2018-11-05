@@ -1,5 +1,5 @@
 # Sniffy
-Sniffy is a scripty built with python3.6 to craw a webpage and fetch data, and uses NLTK to perform analysis such as Word frequency and will later add nsentiment analysis
+Sniffy is a script built with ```Python3.6``` to craw a webpage and fetch data, and uses ```NLTK``` to perform analysis such as Word frequency and will later add sentiment analysis
 
 ## Installation
 Create a Virtual environment
