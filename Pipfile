@@ -10,6 +10,7 @@ nltk = "*"
 requests = {extras = ["security"], version = "*"}
 certifi = "*"
 matplotlib = "*"
+vadersentiment = "*"
 
 [dev-packages]
 

@@ -12,6 +12,10 @@ import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plot
 
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+#create an instance of the analyser
+analyser = SentimentIntensityAnalyzer()
 
 class Sniff():
     """
@@ -39,31 +43,46 @@ class Sniff():
         clean_text = text.get_text()
         return clean_text
 
-    def tokenize_words (self, data):
+    def tokenize_words (self, clean_text):
         """
         Packs all words in sentences into a list
         """
-        words = nltk.word_tokenize(data)
+        words = nltk.word_tokenize(clean_text)
         tokens = [w for w in words]
         return tokens
 
-    def remove_stop_words(self, data):
+    def remove_stop_words(self, tokens):
         """
         Remove stop words from the text
         """
         cleaned_data = []
-        for token in data:
+        for token in tokens:
             if token.lower() not in set(stopwords.words('english')):
                 cleaned_data.append(token)
         return cleaned_data
 
-    def word_frequency(self, data):
+    def word_frequency(self, cleaned_data):
         """
+        This function picks cleaned text from the format_data() function
         Returns words frequency and also plot their frequency dist graph
         """
         new_data = [] 
-        freq = nltk.FreqDist(data)
+        freq = nltk.FreqDist(cleaned_data)
         freq.plot(50, cumulative=False)
         for key, value in freq.items():
             new_data.append({key:value})
         return new_data
+
+    def get_sentence_polarity(self, clean_text):
+        """
+        Performing sentiment analysis on text statements to get their polarity
+        """
+        sents = nltk.sent_tokenize(clean_text, language='english')
+        all_sents = [sent for sent in sents]
+
+        #analyse each of the sentences
+        response = []
+        for sent in all_sents:
+            res = analyser.polarity_scores(sent)
+            response.append({sent:res['compound']})
+        return response
