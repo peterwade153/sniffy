@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/peterwade153/sniffy.svg?branch=master)](https://travis-ci.org/peterwade153/sniffy)
 # Sniffy
 Sniffy is a script built with ```Python3.6``` to craw a webpage and fetch data, and uses ```NLTK``` to perform analysis such as Word frequency. 
 The Application uses VADER (Valence Aware Dictionary and sEntiment Reasoner) a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media, and works well on texts from other domains to perform sentiment analysis on the text obtained from a crawled page
