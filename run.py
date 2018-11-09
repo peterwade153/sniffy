@@ -9,6 +9,6 @@ if __name__ == '__main__':
     # ls = sd.tokenize_words(ls)
     # ls = sd.remove_stop_words(ls)
     # ls = sd.word_frequency(ls)
-    ls = sd.get_sentence_polarity(ls)
+    sd.get_sentence_polarity(ls)
     # db = Database_handler()
     # db.create_table()

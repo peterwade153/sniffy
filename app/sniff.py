@@ -87,10 +87,7 @@ class Sniff():
         all_sents = [sent for sent in sents]
 
         #analyse each of the sentences
-        response = []
         for sent in all_sents:
             res = analyser.polarity_scores(sent)
-            response.append({sent:res['compound']})
             res = Text(sent, res['compound'])
             res.save_text()
-        return response
