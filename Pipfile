@@ -11,6 +11,7 @@ requests = {extras = ["security"], version = "*"}
 certifi = "*"
 matplotlib = "*"
 vadersentiment = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 

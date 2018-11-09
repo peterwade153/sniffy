@@ -1,4 +1,5 @@
 from app.sniff import Sniff
+from app.db_handler.db_setup import Database_handler
 
 if __name__ == '__main__':
     url = 'http://honorsprogram.gwublogs.com/2017/11/08/honorsproblems-ive-messed-up-everything-oh-no/'
@@ -10,5 +11,7 @@ if __name__ == '__main__':
     # ls = sd.tokenize_words(ls)
     # ls = sd.remove_stop_words(ls)
     # ls = sd.word_frequency(ls)
-    ls = sd.get_sentence_polarity(ls)
-    print(ls)
+    # ls = sd.get_sentence_polarity(ls)
+    db = Database_handler()
+    db.create_table()
+    

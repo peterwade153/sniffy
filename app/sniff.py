@@ -17,6 +17,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #create an instance of the analyser
 analyser = SentimentIntensityAnalyzer()
 
+
 class Sniff():
     """
     Crawls a page to fetch text
