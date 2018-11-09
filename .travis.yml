@@ -10,4 +10,4 @@ install:
 
 
 script:
-  - python test_app.py
+  - pytest
