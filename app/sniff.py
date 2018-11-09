@@ -14,6 +14,8 @@ import matplotlib.pyplot as plot
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+from app.db_handler.db_helper import Text
+
 #create an instance of the analyser
 analyser = SentimentIntensityAnalyzer()
 
@@ -40,8 +42,11 @@ class Sniff():
         Formats the fetched data to actual text, removing the html tags.
         """
         soup = BeautifulSoup(html, "html5lib")
-        text = soup.find("div", 'post-body entry-content')
-        clean_text = text.get_text()
+        try:
+            text = soup.find("div", 'post-body entry-content')
+            clean_text = text.get_text()
+        except AttributeError:
+            pass
         return clean_text
 
     def tokenize_words (self, clean_text):
@@ -86,4 +91,6 @@ class Sniff():
         for sent in all_sents:
             res = analyser.polarity_scores(sent)
             response.append({sent:res['compound']})
+            res = Text(sent, res['compound'])
+            res.save_text()
         return response

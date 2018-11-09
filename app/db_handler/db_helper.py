@@ -1,4 +1,5 @@
-from db_setup import Database_handler
+import psycopg2
+from app.db_handler.db_setup import Database_handler
 
 #create insatnce of the Database_handler
 db = Database_handler()
@@ -22,4 +23,8 @@ class Text:
         add_text_query = ("""
         INSERT INTO analytics (SENTENCE,SENTIMENT) VALUES (%s, %s);
         """)
-        db.cur.execute(add_text_query)
+
+        try:
+            db.cur.execute(add_text_query, (self.text, self.sentiment))
+        except psycopg2.Error as e:
+            raise e
