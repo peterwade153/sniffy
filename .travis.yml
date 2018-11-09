@@ -9,6 +9,13 @@ install:
   - pipenv install
   - pipenv install requests
 
+services:
+  - postgresql
+
+
+before_script:
+  - psql -c "CREATE DATABASE sniffy;" -U postgres
+
 
 script:
   - pytest
